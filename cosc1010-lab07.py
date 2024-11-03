@@ -1,12 +1,9 @@
-# Your Name Here
+# Ruby Young 
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
-# Lab Section: 
-# Sources, people worked with, help given to: 
-# your
-# comments
-# here
+# 11/6/24
+# Lab 07
+# Lab Section: 16
+# Sources, people worked with, help given to: Nile Young 
 
 
 # Prompt the user for an upper bound 
@@ -17,11 +14,23 @@
     # If a user did not enter a number output a statement saying so
 # You will continue to prompt the user until a proper integer value is entered
 
+
 factorial = 1
+
+while True:
+    upper_bound = input("Enter a number to find the factorial: ")
+    if upper_bound.isdigit():
+        break
+
+number = 1 
+upper_bound = int(upper_bound)
+while number <= upper_bound:
+    factorial *= number
+    number += 1
 
 print(f"The result of the factorial based on the given bound is {factorial}")
 
-print("*"*75)
+
 # Create a while loop that prompts a user for input of an integer values
 # Sum all inputs. When the user enters 'exit' (regardless of casing) end the loop
 # Upon ending the loop print the sum
@@ -37,11 +46,26 @@ print("*"*75)
 # All this together means you will have an intensive while loop that includes multiple if statements, likely with some nesting 
 # The sum should start at 0 
 
-num_sum = 0 
+total_sum = 0 
+pos_int = 0
+neg_int = 0 
+while True: 
+    integers = input("Enter an integer value (to exit the loop type in exit): ")
 
-print(f"Your final sum is {num_sum}")
+    if integers.lower() == 'exit':
+        print("You have exited the loop :)")
+        break 
+    elif integers[0] == '-':
+        integers = integers.replace("-","")
+        neg_int += int(integers)
+    elif integers.isnumeric():
+        pos_int += int(integers)
 
-print("*"*75)
+total_sum = pos_int - neg_int
+print(f"The total sum of the integers is {total_sum}")
+
+
+
 # Now you will be creating a two operand calculator
 # It will support the following operators: +,-,/,*,% 
 # So accepted input is of the form `operand operator operand` 
@@ -59,4 +83,51 @@ print("*"*75)
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
 
+
+number1 = 0
+symbol = 0
+number2 = 0
+answer = 0
+
+while True:
+    equation = input("Input a operan operater operand equation (or enter exit to stop): ")
+    equation = equation.replace(" ","") #removes the spaces in the equation 
+
+    if equation.lower()== 'exit':
+        print("You have exited the loop :)")
+        break
+    if '+' in equation:
+        symbol = '+'
+    elif '-' in equation:
+        symbol = '-'
+    elif '*' in equation:
+        symbol = '*'
+    elif '/' in equation:
+        symbol = '/'
+    elif '%' in equation:
+        symbol = '%'
+    else: 
+        print("Invalid equation, please enter a valid symbol")
+    
+    parts = equation.split(symbol)
+    number1 = float(parts[0])
+    number2 = float(parts[-1])
+    
+    if symbol == '-':
+        answer = number1 - number2
+    elif symbol == '+':
+        answer = number1 + number2
+    elif symbol == '/':
+        if number2 == 0: 
+            print("ERROR!(division by zero)")
+            continue
+        answer = number1 / number2
+    elif symbol == '*':
+        answer = number1 * number2
+    elif symbol == '%':
+        answer = number1 % number2
+    else: 
+        print("invalid equation, please enter a valid symbol")
         
+    print(f"The results from the equation is: {answer}")
+
