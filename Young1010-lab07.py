@@ -18,9 +18,11 @@
 factorial = 1
 
 while True:
-    upper_bound = input("Enter a number to find the factorial: ")
+    upper_bound = input("Enter a positive number to find the factorial: ")
     if upper_bound.isdigit():
         break
+    else:
+        print('Enter only a positive number please!')
 
 number = 1 
 upper_bound = int(upper_bound)
@@ -30,6 +32,7 @@ while number <= upper_bound:
 
 print(f"The result of the factorial based on the given bound is {factorial}")
 
+print("*"*75)
 
 # Create a while loop that prompts a user for input of an integer values
 # Sum all inputs. When the user enters 'exit' (regardless of casing) end the loop
@@ -50,7 +53,7 @@ total_sum = 0
 pos_int = 0
 neg_int = 0 
 while True: 
-    integers = input("Enter an integer value (to exit the loop type in exit): ")
+    integers = input("Enter an integer value to sum them, (to stop enter exit): ")
 
     if integers.lower() == 'exit':
         print("You have exited the loop :)")
@@ -60,11 +63,14 @@ while True:
         neg_int += int(integers)
     elif integers.isnumeric():
         pos_int += int(integers)
-
+    else:
+        print("Enter an integer or 'exit' to end the loop and get your result")
+    
 total_sum = pos_int - neg_int
 print(f"The total sum of the integers is {total_sum}")
 
 
+print('*'*75)
 
 # Now you will be creating a two operand calculator
 # It will support the following operators: +,-,/,*,% 
@@ -108,26 +114,37 @@ while True:
         symbol = '%'
     else: 
         print("Invalid equation, please enter a valid symbol")
-    
-    parts = equation.split(symbol)
-    number1 = float(parts[0])
-    number2 = float(parts[-1])
-    
-    if symbol == '-':
-        answer = number1 - number2
-    elif symbol == '+':
-        answer = number1 + number2
-    elif symbol == '/':
-        if number2 == 0: 
-            print("ERROR!(division by zero)")
-            continue
-        answer = number1 / number2
-    elif symbol == '*':
-        answer = number1 * number2
-    elif symbol == '%':
-        answer = number1 % number2
-    else: 
-        print("invalid equation, please enter a valid symbol")
-        
-    print(f"The results from the equation is: {answer}")
+        continue
 
+    parts = equation.split(symbol)
+
+    if len(parts) == 2: 
+        number1 = parts[0]
+        number2 = parts[1]
+
+    
+        if number1.isdigit() and number2.isdigit():
+            number1 = float(number1)
+            number2 = float(number2)
+        
+
+            if symbol == '-':
+                answer = number1 - number2
+            elif symbol == '+':
+                answer = number1 + number2
+            elif symbol == '/':
+                if number2 == 0: 
+                    print("ERROR!(division by zero)")
+                    continue
+                answer = number1 / number2
+            elif symbol == '*':
+                answer = number1 * number2
+            elif symbol == '%':
+                answer = number1 % number2
+             
+            print(f"The results from the equation is: {answer}")
+        else: 
+            print(f"Enter only valid operands (positive integers) please or 'exit'")
+    else:
+        print("Invalid equation format, please enter only in the form: operand operator operand. ")
+ 
